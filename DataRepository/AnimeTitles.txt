@@ -1,7 +1,7 @@
-﻿Chu Feng: B.E.E
-Zombie Clay Anime
-DD Hokuto no Ken 2 Ichigo Aji+
-The Reflection
+Zombie Clay Animation: Life of the Dead
+Boku dake ga Inai Machi
+Kono Subarashii Sekai ni Shukufuku wo!
+Cowboy Bebop
 Utakata Overdrive
 Seikai Suru Kado
 Aira
@@ -10,7 +10,7 @@ Shirogane no Guardian
 Cupi's Chocolates
 Printers in India
 Fairy Tail Zero
-Naruto Shippūden: Itachi Shinden-hen ~Hikari to Yami~
+Naruto Shippuden: Itachi Shinden-hen ~Hikari to Yami~
 Trigun
 Cowboy Bebop
 Hachimitsu to Clover
@@ -37,7 +37,7 @@ D.C.: Da Capo
 D.N.Angel
 Texhnolyze
 Monster
-Rozen Maiden: Träumend
+Rozen Maiden: Tr�umend
 Azumanga Daioh
 Basilisk: Kouga Ninpou Chou
 Black Cat
@@ -61,9 +61,9 @@ Full Metal Panic? Fumoffu
 Last Exile
 Mai-HiME
 Mai-Otome
-Shin Shirayuki-hime Densetsu Prétear
+Shin Shirayuki-hime Densetsu Pr�tear
 Air
-Aishiteruze Baby★★
+Aishiteruze Baby??
 Akazukin Chacha
 Ayashi no Ceres
 Hana yori Dango
@@ -132,8 +132,8 @@ Blood+
 Initial D Second Stage
 Love Hina
 Maburaho
-Onegai☆Teacher
-Onegai☆Twins
+Onegai?Teacher
+Onegai?Twins
 Rizelmine
 Speed Grapher
 Tenshi na Konamaiki
@@ -142,7 +142,7 @@ Yumeria
 Juuni Kokuki
 Lodoss-tou Senki: Eiyuu Kishi Den
 R.O.D the TV
-Ranma ½
+Ranma �
 Maria-sama ga Miteru
 Samurai Champloo
 Kidou Senkan Nadesico
@@ -180,14 +180,14 @@ Madlax
 Power Stone
 Ikkitousen
 Futakoi Alternative
-Happy☆Lesson: Advance
+Happy?Lesson: Advance
 Hajime no Ippo
 Gunparade March: Arata Naru Kougunka
 Gungrave
 Bleach
 Gad Guard
 Mahou Tsukai ni Taisetsu na Koto
-Love♥Love?
+Love?Love?
 Kiddy Grade
 Mahoromatic
 Viewtiful Joe
@@ -212,7 +212,7 @@ Grenadier: Hohoemi no Senshi
 Cinderella Boy
 Mirai Shounen Conan
 Aa! Megami-sama!: Chichaitte Koto wa Benri da ne
-Abenobashi Mahou☆Shoutengai
+Abenobashi Mahou?Shoutengai
 Kerokko Demetan
 Zettai Shounen
 Akahori Gedou Hour Rabuge
@@ -254,7 +254,7 @@ Ojamajo Doremi Sharp
 Ojamajo Doremi
 Motto! Ojamajo Doremi
 Shakugan no Shana
-UG☆Ultimate Girls
+UG?Ultimate Girls
 Fate/stay night
 Himiko-Den
 Gallery Fake
@@ -269,7 +269,7 @@ H2
 Haibane Renmei
 Capeta
 Suzuka
-Yuu☆Yuu☆Hakusho
+Yuu?Yuu?Hakusho
 Ai Yori Aoshi: Enishi
 Gantz 2nd Stage
 Seikai no Senki
@@ -282,7 +282,7 @@ Buzzer Beater
 Tantei Gakuen Q
 Gun x Sword
 Kore ga Watashi no Goshujinsama
-Ragnarök the Animation
+Ragnar�k the Animation
 Stratos 4
 Samurai Deeper Kyou
 Dirty Pair
@@ -291,8 +291,8 @@ Magic Knight Rayearth
 Shoujo Kakumei Utena
 Maria-sama ga Miteru: Haru
 Tales of Eternia
-Weiß Kreuz Glühen
-Weiß Kreuz
+Wei� Kreuz Gl�hen
+Wei� Kreuz
 Fantastic Children
 Gokujou Seitokai
 Mushishi
