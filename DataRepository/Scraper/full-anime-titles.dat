@@ -1,3 +1,4 @@
+# From:  http://wiki.anidb.net/w/API#Anime_Titles
 # created: Thu Feb 25 03:00:01 2016
 # <aid>|<type>|<language>|<title>
 # type: 1=primary title (one per anime), 2=synonyms (multiple per anime), 3=shorttitles (multiple per anime), 4=official title (one per language)
