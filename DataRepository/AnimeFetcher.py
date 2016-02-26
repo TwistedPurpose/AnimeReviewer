@@ -2,12 +2,13 @@ import requests
 import xml.etree.ElementTree as ET
 
 class Anime: 
-        def __init__(self, malId, title, score, animeType, startDate, episodes, description):
+        def __init__(self, malId, title, score, animeType, startDate, endDate, episodes, description):
                 self.malId = malId
                 self.title = title
                 self.score = score
                 self.animeType = animeType
                 self.startDate = startDate
+                self.endDate = endDate
                 self.episodes = episodes
                 self.description = description
 
@@ -22,9 +23,10 @@ class Fetcher:
                         score = entry.find('score').text
                         animeType = entry.find('type').text
                         startDate = entry.find('start_date').text
+                        endDate = entry.find('end_date').text
                         episodes = entry.find('episodes').text
                         description = entry.find('synopsis').text
-                        animeObj = Anime(malId,title,score,animeType,startDate,episodes,description)
+                        animeObj = Anime(malId,title,score,animeType,startDate,endDate,episodes,description)
                         animeList.append(animeObj)
                 return animeList
 
@@ -49,7 +51,4 @@ class Fetcher:
                                         print "Fetched " + str(i) + " records so far."
                         else:
                                 print "Could not fetch " + restfulAnimeTitle.strip()
-
-        
-fetcher = Fetcher()
-fetcher.fetchAnime()
+                return animeList
