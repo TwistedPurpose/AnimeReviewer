@@ -37,7 +37,7 @@ for restfulAnimeTitle in animeTitleList:
         if (r.status_code == 200):
                 animeList.extend(parseAnimeXML(r.content))
                 i = i + 1
-                if (i % 100 == 0):
+                if (i % 10 == 0):
                         print "Fetched " + str(i) + " records so far."
         else:
                 print "Could not fetch " + restfulAnimeTitle.strip()
