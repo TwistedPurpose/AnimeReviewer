@@ -2,7 +2,8 @@ import requests
 import xml.etree.ElementTree as ET
 
 class Anime: 
-        def __init__(self, title, score, animeType, startDate, episodes, description):
+        def __init__(self, malId, title, score, animeType, startDate, episodes, description):
+                self.malId = malId
                 self.title = title
                 self.score = score
                 self.animeType = animeType
@@ -16,13 +17,14 @@ class Fetcher:
                 animeXML = ET.fromstring(xml)
                 animeList = []
                 for entry in animeXML:
+                        malId = entry.find('id').text
                         title = entry.find('title').text
                         score = entry.find('score').text
                         animeType = entry.find('type').text
                         startDate = entry.find('start_date').text
                         episodes = entry.find('episodes').text
                         description = entry.find('synopsis').text
-                        animeObj = Anime(title,score,animeType,startDate,episodes,description)
+                        animeObj = Anime(malId,title,score,animeType,startDate,episodes,description)
                         animeList.append(animeObj)
                 return animeList
 
