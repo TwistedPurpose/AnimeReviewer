@@ -16,7 +16,7 @@ table = soup('div', {'id': 'list_surround'})
 
 
 for row in table:
-    row.find_all('a',{'class':'animetitle'})
+    row.find_all('table').find('a',{'class':'animetitle'})
     #print row.find('tr', {'class', 'text pad col1'})
     #print row.find_all('td', {'class', 'text pad col1'})
 #for row in soup('table'):
