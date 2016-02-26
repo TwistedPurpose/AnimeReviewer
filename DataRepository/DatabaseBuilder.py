@@ -12,6 +12,9 @@ class DBBuilder:
         def close(self):
                 self.__conn.close()
 
+        def commit(self):
+                self.__conn.commit()
+
         def clobberAndRebuild(self):
                 print "Clobbering DB and rebuilding!  Uguu!"
                 cursor = self.connect()
@@ -26,6 +29,7 @@ class DBBuilder:
                                 episodes int,
                                 description varchar(500)
                                 )''')
+                self.commit()
                 self.close()
                 
         def build(self):
@@ -41,6 +45,7 @@ class DBBuilder:
                                 episodes int,
                                 description varchar(500)
                                 )''')
+                self.commit()
                 self.close()
 
 
