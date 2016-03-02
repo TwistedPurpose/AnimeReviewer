@@ -26,25 +26,28 @@ for i in ids:
 	for row in ratingTable:
 		ref1 = row.find_all('span', {'itemprop':'ratingCount'})
 		for x in ref1:
-			ratingCount = x.get_text()
-			print ratingCount.strip()
+			ratingCount = x.get_text().strip()
 #			if (len(text) > 0):
 #				outfile.write(text.strip().encode("UTF-8") + '\n')
 	#get duration
 	duration = ""
+	rating = ""
 	if (url == animeurl):
 		table = soup('td', {'class': 'borderClass'})
 		for row in table:
-			ref1 = row.find_all('div', {'class':'spaceit'})
+			ref1 = row.find_all('div')
 			durationflag = False
 			for x in ref1:
 				text = x.get_text().strip()
 				if text.startswith("Dur"):
 					array = text.split(" ",1)
-					#print array
 					duration = array[1].strip()
-	print "DURATION "+ duration
+				if text.startswith("Rating"):
+					array = text.split(" ",1)
+					rating = array[1].strip()
 	#			if (len(text) > 0):
 	#				outfile.write(text.strip().encode("UTF-8") + '\n')
-	#get Rating
+	tup = (i, ratingCount.encode("utf-8"), duration.encode("utf-8"), rating.encode("utf-8"))
+	data.append(tup)
+	print tup
 #outfile.close()
