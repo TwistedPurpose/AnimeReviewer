@@ -1,4 +1,5 @@
 import urllib2
+import re #parse Int out of Text
 from bs4 import BeautifulSoup
 
 #Scrapes statistics from MyAnimeList Page
@@ -30,13 +31,19 @@ for i in ids:
 #			if (len(text) > 0):
 #				outfile.write(text.strip().encode("UTF-8") + '\n')
 	#get duration
+	duration = ""
 	if (url == animeurl):
 		table = soup('td', {'class': 'borderClass'})
 		for row in table:
 			ref1 = row.find_all('div', {'class':'spaceit'})
+			durationflag = False
 			for x in ref1:
-				text = x.get_text()
-				print text.strip()
+				text = x.get_text().strip()
+				if text.startswith("Dur"):
+					array = text.split(" ",1)
+					#print array
+					duration = array[1].strip()
+	print "DURATION "+ duration
 	#			if (len(text) > 0):
 	#				outfile.write(text.strip().encode("UTF-8") + '\n')
 	#get Rating
