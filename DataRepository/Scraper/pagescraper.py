@@ -16,6 +16,7 @@ ids = {15}
 for i in ids:
 	mangaurl = 'http://myanimelist.net/manga/'+str(i)
 	animeurl = 'http://myanimelist.net/anime/'+str(i)
+	
 	if (len(sys.argv) > 2 ) and sys.argv[2] == "manga" :
 		url = mangaurl
 	else:
@@ -31,6 +32,7 @@ for i in ids:
 		ref1 = row.find_all('span', {'itemprop':'ratingCount'})
 		for x in ref1:
 			ratingCount = x.get_text().strip()
+
 	#If we are searching an anime page
 	if url == animeurl:
 		#get duration and rating(age)
@@ -56,4 +58,6 @@ for i in ids:
 	else:
 		tup = (i, ratingCount.encode("utf-8"))
 		data.append(tup)
+
+
 	print tup
