@@ -1,8 +1,10 @@
 import requests
 import xml.etree.ElementTree as ET
+from Scraper import pagescraper
 
 class Anime: 
-    def __init__(self, malId, title, score, animeType, startDate, endDate, episodes, description):
+    def __init__(self, malId, title, score, animeType, startDate, endDate, episodes,
+        description,ratingCount=0,duration=0,ageRating=''):
         self.malId = malId
         self.title = title
         self.score = score
@@ -11,6 +13,9 @@ class Anime:
         self.endDate = endDate
         self.episodes = episodes
         self.description = description
+        self.ratingCount = ratingCount
+        self.duration = duration
+        self.ageRating = ageRating
 
 class Fetcher:
         
@@ -31,10 +36,12 @@ class Fetcher:
         return animeList
 
     def fetchAnime(self):
-        fileName = "AnimeTitles.txt"
+        fileName = "./Scraper/spacecowboy-anime.txt" 
+        #fileName = "AnimeTitles.txt"
         url = 'http://myanimelist.net/api/anime/search.xml'
         animeTitleList = []
         animeList = []
+        ids = []
         i = 0
 
         with open(fileName) as file:
@@ -51,4 +58,17 @@ class Fetcher:
                     print "Fetched " + str(i) + " records so far."
             else:
                 print "Could not fetch " + restfulAnimeTitle.strip()
+
+
+        for ndx, anime in enumerate(animeList):
+            extraInfo = pagescraper.scrapeForExtraData([anime.malId], 'anime')
+            if not extraInfo:
+                print "Failed on scrape on " + anime.malId
+            else:
+                animeList[ndx].ratingCount = extraInfo[0][1]
+                animeList[ndx].duration = extraInfo[0][2]
+                animeList[ndx].ageRating = extraInfo[0][3]
+
+        print "Scraping end!"
+
         return animeList

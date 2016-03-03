@@ -18,14 +18,14 @@ class DBFiller:
     def addAnimeListToDB(self,animeList):
         cursor = self.connect()
         cursor.executemany('''INSERT OR IGNORE INTO anime VALUES
-                (?,?,?,?,?,?,?,?)''',animeList)
+                (?,?,?,?,?,?,?,?,?,?,?)''',animeList)
         self.commit()
         self.close()
     
     def fillDBWithAnime(self):
         print "I hope DB Senpai notices me!"
         builder = DatabaseBuilder.DBBuilder()
-        builder.build()
+        builder.clobberAndRebuild()
 
         fetcher = AnimeFetcher.Fetcher()
         animeList = fetcher.fetchAnime()
@@ -34,7 +34,8 @@ class DBFiller:
 
         for anime in animeList:
                 tup = (anime.malId,anime.title,anime.score, anime.animeType,
-                       anime.startDate,anime.endDate,anime.episodes,'')
+                       anime.startDate,anime.endDate,anime.episodes,anime.description,
+                       anime.ratingCount,anime.duration,anime.ageRating)
                 dbAnimeList.append(tup)
 
         self.addAnimeListToDB(dbAnimeList)

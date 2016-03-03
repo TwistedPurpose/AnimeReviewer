@@ -15,9 +15,12 @@ class DatabasePlugs:
     def getAllAnime(self):
         animeList = []
         c = self.connect()
-        c.execute('''SELECT id, title, score, animeType, startDate, endDate, episodes, description from anime''')
+        c.execute('''SELECT id, title, score, animeType, startDate, endDate, episodes, description,
+         ratingCount, duration, ageRating from anime''')
         for row in c:
-            anime = AnimeFetcher.Anime(row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7])
+            print row
+            anime = AnimeFetcher.Anime(row[0],row[1],row[2],row[3],row[4],row[5],
+                row[6],row[7],row[8],row[9],row[10])
             animeList.append(anime)
         self.close()
         return animeList

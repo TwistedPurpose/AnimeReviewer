@@ -27,7 +27,10 @@ class DBBuilder:
                                 startDate date,
                                 endDate date,
                                 episodes int,
-                                description varchar(500)
+                                description varchar(500),
+                                ratingCount int,
+                                duration int,
+                                ageRating varchar(10)
                                 )''')
                 self.commit()
                 self.close()
@@ -43,7 +46,10 @@ class DBBuilder:
                                 startDate date,
                                 endDate date,
                                 episodes int,
-                                description varchar(500)
+                                description varchar(500),
+                                ratingCount int,
+                                duration int,
+                                ageRating varchar(10)
                                 )''')
                 self.commit()
                 self.close()
