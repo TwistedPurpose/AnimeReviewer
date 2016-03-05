@@ -1,43 +1,47 @@
-import LOWESS, DatabasePlugs
+import DatabasePlugs
+import numpy as np
+import random
 from sklearn import linear_model
-from sklearn import tree
-from sklearn import svm
-from sklearn.datasets import load_iris
+from enum import Enum
+
+class TestType(Enum):
+    episodes = 1
+    startMonth = 2
+    startYear = 3
 
 if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    ratingList = []
-    episodeList = []
-    X = []
-    Y = []
+    sampleRatingList = []
+    sampleEpisodeList = []
+    testRatingList = []
+    testEpisodeList = []
 
     for anime in animeList:
-        ratingList.append(anime.score)
-        episodeList.append(anime.episodes)
+        if (anime.score < 5 or anime.episodes < 0):
+            continue
+        num = random.random()
+        if (num <= .25):
+            testRatingList.append(anime.score)
+            testEpisodeList.append([anime.episodes])
+        else:
+            sampleRatingList.append(anime.score)
+            sampleEpisodeList.append([anime.episodes])
 
-    for anime in animeList:
-    	Y.append([anime.score])
-    	X.append([anime.episodes])
+    episodeSample = np.array(sampleEpisodeList)
+    ratingSample = np.array(sampleRatingList)
 
-    #iris = load_iris()
+    episodeTest = np.array(testEpisodeList)
+    ratingTest = np.array(testRatingList)
 
-    #print len(iris.data)
-    #print len(iris.target)
-    #print iris.target
+    from matplotlib import pyplot as pl
 
-    #decisionTree = tree.DecisionTreeClassifier()
-    #decisionTree = decisionTree.fit(iris.data,iris.target)
-    #print decisionTree.predict([5.9,  3.,   5.1,  1.8])
+    lr = linear_model.LinearRegression()
+    lr.fit(episodeSample,ratingSample)
 
-    decisionTree = tree.DecisionTreeClassifier()
-    decisionTree = decisionTree.fit(X,Y)
-    print decisionTree.predict([200])
-
-    #goodluck = svm.SVC()
-
-    #goodluck.fit(X,Y)
-    #LOWESS.lowess(ratingList, episodeList)
-	#clf = linear_model.LinearRegression()
-	#clf.fit(ratingList, episodeList)
+    pl.scatter(episodeTest, ratingTest, label='episodes/rating', color='red')
+    pl.plot(episodeTest, lr.predict(episodeTest), label='rating prediction')
+    #pl.xticks(())
+    #pl.yticks(())
+    pl.show()
