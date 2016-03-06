@@ -17,7 +17,7 @@ if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    testType = TestType.ratingCount
+    testType = TestType.duration
 
     graphLabel = ""
 
@@ -46,7 +46,7 @@ if __name__=='__main__':
             y = [anime.ratingCount]
             graphLabel = 'rating/user rating count'
         elif (testType == TestType.duration):
-            y = [anime.druation]
+            y = [anime.duration]
             graphLabel = 'rating/duration'
         elif (testType == TestType.ageRating):
             y = [anime.ageRating]
@@ -67,7 +67,9 @@ if __name__=='__main__':
 
     from matplotlib import pyplot as pl
 
-    lr = linear_model.LinearRegression()
+    testX, testY = zip(*sorted(zip(testX, testY)))
+
+    lr = linear_model.LogisticRegression()
     lr.fit(sampleX,sampleY)
 
     pl.scatter(testX, testY, label=graphLabel, color='red')
