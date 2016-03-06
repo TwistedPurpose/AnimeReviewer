@@ -30,8 +30,7 @@ class DBBuilder:
                                 description varchar(500),
                                 ratingCount int,
                                 duration int,
-                                ageRating varchar(10)
-                                )''')
+                                ageRating varchar(10))''')
                 self.commit()
                 self.close()
                 
@@ -49,8 +48,7 @@ class DBBuilder:
                                 description varchar(500),
                                 ratingCount int,
                                 duration int,
-                                ageRating varchar(10)
-                                )''')
+                                ageRating varchar(10))''')
                 self.commit()
                 self.close()
 

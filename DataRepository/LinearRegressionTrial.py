@@ -8,40 +8,69 @@ class TestType(Enum):
     episodes = 1
     startMonth = 2
     startYear = 3
+    ratingCount = 4
+    duration = 5
+    ageRating = 6
+    
 
 if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    sampleRatingList = []
-    sampleEpisodeList = []
-    testRatingList = []
-    testEpisodeList = []
+    testType = TestType.ratingCount
+
+    graphLabel = ""
+
+    sampleYList = []
+    sampleXList = []
+    testYList = []
+    testXList = []
 
     for anime in animeList:
-        if (anime.score < 5 or anime.episodes < 0):
+        if (anime.score < 2):
             continue
         num = random.random()
+        x = anime.score
+        y = []
+
+        if(testType == TestType.episodes):
+            y = [anime.episodes]
+            graphLabel = 'rating/episodes'
+        elif (testType == TestType.startMonth):
+            y = [anime.getMonth()]
+            graphLabel = 'rating/start month'
+        elif (testType == TestType.startYear):
+            y = [anime.getYear()]
+            graphLabel = 'rating/start year'
+        elif (testType == TestType.ratingCount):
+            y = [anime.ratingCount]
+            graphLabel = 'rating/user rating count'
+        elif (testType == TestType.duration):
+            y = [anime.druation]
+            graphLabel = 'rating/duration'
+        elif (testType == TestType.ageRating):
+            y = [anime.ageRating]
+            graphLabel = 'rating/age rating'
+
         if (num <= .25):
-            testRatingList.append(anime.score)
-            testEpisodeList.append([anime.episodes])
+            testYList.append(x)
+            testXList.append(y)
         else:
-            sampleRatingList.append(anime.score)
-            sampleEpisodeList.append([anime.episodes])
+            sampleYList.append(x)
+            sampleXList.append(y)
 
-    episodeSample = np.array(sampleEpisodeList)
-    ratingSample = np.array(sampleRatingList)
+    sampleX = np.array(sampleXList)
+    sampleY = np.array(sampleYList)
 
-    episodeTest = np.array(testEpisodeList)
-    ratingTest = np.array(testRatingList)
+    testX = np.array(testXList)
+    testY = np.array(testYList)
 
     from matplotlib import pyplot as pl
 
     lr = linear_model.LinearRegression()
-    lr.fit(episodeSample,ratingSample)
+    lr.fit(sampleX,sampleY)
 
-    pl.scatter(episodeTest, ratingTest, label='episodes/rating', color='red')
-    pl.plot(episodeTest, lr.predict(episodeTest), label='rating prediction')
-    #pl.xticks(())
-    #pl.yticks(())
+    pl.scatter(testX, testY, label=graphLabel, color='red')
+    pl.plot(testX, lr.predict(testX), label='rating prediction')
+    pl.legend()
     pl.show()

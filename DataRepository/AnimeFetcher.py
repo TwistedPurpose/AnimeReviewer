@@ -17,6 +17,12 @@ class Anime:
         self.duration = duration
         self.ageRating = ageRating
 
+    def getMonth(self):
+        return int(self.startDate.split('-')[1])
+
+    def getYear(self):
+        return int(self.startDate.split('-')[0])
+
 class Fetcher:
         
     def parseAnimeXML(self,xml):
