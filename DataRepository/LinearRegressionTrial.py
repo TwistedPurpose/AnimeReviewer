@@ -46,6 +46,8 @@ if __name__=='__main__':
             y = [anime.ratingCount]
             graphLabel = 'rating/user rating count'
         elif (testType == TestType.duration):
+            if anime.duration <= 0:
+                continue
             y = [anime.duration]
             graphLabel = 'rating/duration'
         elif (testType == TestType.ageRating):
