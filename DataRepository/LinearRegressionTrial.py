@@ -32,35 +32,36 @@ if __name__=='__main__':
         if (anime.score < 2):
             continue
         num = random.random()
-        x = anime.score
-        y = []
+        y = anime.score
+        x = []
 
         if(testType == TestType.episodes):
-            if anime.episodes <= 0 or anime.episodes >= 100:
+        if (anime.score < 2 or anime.episodes <= 0 
+            or anime.episodes >= 100 or anime.duration <= 0):
                 continue
-            y = [anime.episodes]
+            x = [anime.episodes]
             graphLabel = 'rating/episodes'
         elif (testType == TestType.startMonth):
-            y = [anime.getMonth()]
+            x = [anime.getMonth()]
             graphLabel = 'rating/start month'
         elif (testType == TestType.startYear):
-            y = [anime.getYear()]
+            x = [anime.getYear()]
             graphLabel = 'rating/start year'
         elif (testType == TestType.ratingCount):
-            y = [anime.ratingCount]
+            x = [anime.ratingCount]
             graphLabel = 'rating/user rating count'
         elif (testType == TestType.duration):
             if anime.duration <= 0:
                 continue
-            y = [anime.duration]
+            x = [anime.duration]
             graphLabel = 'rating/duration'
         elif (testType == TestType.ageRating):
-            y = [anime.ageRating]
+            x = [anime.ageRating]
             graphLabel = 'rating/age rating'
 
         if (num <= .25):
-            testYList.append(x)
-            testXList.append(y)
+            testYList.append(y)
+            testXList.append(x)
         else:
             sampleYList.append(y)
             sampleXList.append(x)
@@ -77,30 +78,17 @@ if __name__=='__main__':
 
     errorArray = []
 
-    #lr = linear_model.LogisticRegression()
-    #lr.fit(sampleX,sampleY)
+    lr = linear_model.LogisticRegression()
+    lr.fit(sampleX,sampleY)
 
-    for x in sampleX:
-        if x <= 0:
-            print x
+    for i in range(0, len(testX)-1):
+        pre = lr.predict(testX[i])
+        diff = abs(pre - testY[i])
+        errorArray.append((diff/testY[i])*100)
 
-    yest = LOWESS.lowess(sampleX, sampleY)
+    print np.mean(errorArray)
 
-    import pylab as pl
-    pl.clf()
-    pl.plot(sampleX, sampleY, label='y noisy')
-    pl.plot(sampleX, yest, label='y pred')
+    pl.scatter(testX, testY, label=graphLabel, color='red')
+    pl.plot(testX, lr.predict(testX), label='rating prediction')
     pl.legend()
     pl.show()
-
-    #for i in range(0, len(testX)-1):
-    #    pre = lr.predict(testX[i])
-    #    diff = abs(pre - testY[i])
-    #    errorArray.append((diff/testY[i])*100)
-
-    #print np.mean(errorArray)
-
-    #pl.scatter(testX, testY, label=graphLabel, color='red')
-    #pl.plot(testX, lr.predict(testX), label='rating prediction')
-    #pl.legend()
-    #pl.show()

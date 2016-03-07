@@ -19,7 +19,7 @@ if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    testType = TestType.episodes
+    testType = TestType.duration
 
     graphLabel = ""
 
@@ -36,35 +36,34 @@ if __name__=='__main__':
         y = anime.score
         x = []
 
-        xLabel = "User Rating"
-        yLabel = ""
+        yLabel = "User Rating"
+        xLabel = ""
         if(testType == TestType.episodes):
             x = anime.episodes
             graphLabel = 'rating/episodes'
-            yLabel = "Episode Count"
+            xLabel = "Episode Count"
         elif (testType == TestType.startMonth):
             x = anime.getMonth()
             graphLabel = 'rating/start month'
-            yLabel = "Start Month"
+            xLabel = "Start Month"
         elif (testType == TestType.startYear):
             x = anime.getYear()
             graphLabel = 'rating/start year'
-            yLabel = "Start Year"
+            xLabel = "Start Year"
         elif (testType == TestType.ratingCount):
             x = anime.ratingCount
             graphLabel = 'rating/user rating count'
-            yLabel = "Number of Users Rating"
+            xLabel = "Number of Users Rating"
         elif (testType == TestType.duration):
             x = anime.duration
             graphLabel = 'rating/duration'
-            yLabel = "Episode Duration"
+            xLabel = "Episode Duration"
         elif (testType == TestType.ageRating):
             x = anime.ageRating
             graphLabel = 'rating/age rating'
-            yLabel = "Age Rating"
+            xLabel = "Age Rating"
 
-
-        if (num <= .25):
+        if (num <= .1):
             testYList.append(y)
             testXList.append(x)
         else:
@@ -78,7 +77,7 @@ if __name__=='__main__':
 
     from matplotlib import pyplot as pl
 
-    yest = LOWESS.lowess(sampleX, sampleY)
+    yest = LOWESS.lowess(sampleX, sampleY, iter=10)
 
     import pylab as pl
     pl.clf()
