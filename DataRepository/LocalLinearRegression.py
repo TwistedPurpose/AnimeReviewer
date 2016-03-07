@@ -19,7 +19,7 @@ if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    testType = TestType.episodes
+    testType = TestType.duration
 
     graphLabel = ""
 
@@ -44,6 +44,8 @@ if __name__=='__main__':
             y = anime.getMonth()
             graphLabel = 'rating/start month'
         elif (testType == TestType.startYear):
+            if anime.getYear() < 1990:
+                continue
             y = anime.getYear()
             graphLabel = 'rating/start year'
         elif (testType == TestType.ratingCount):
