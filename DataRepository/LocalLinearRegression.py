@@ -3,6 +3,7 @@ import numpy as np
 import random
 from sklearn import linear_model
 from enum import Enum
+import sys
 
 import LOWESS
 
@@ -18,8 +19,21 @@ class TestType(Enum):
 if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
-
+    
     testType = TestType.duration
+    #Allow changing parameter without editing code
+    if (len(sys.argv) > 1 ):
+        if(sys.argv[1] == '1'):
+            testType = TestType.episodes
+        elif (sys.argv[1] == '2'):
+            testType = TestType.startMonth
+        elif (sys.argv[1] == '3'):
+            testType = TestType.startYear
+        elif (sys.argv[1] == '4'):
+            testType = TestType.ratingCount
+        elif (sys.argv[1] == '5'):
+            testType = TestType.duration
+
 
     graphLabel = ""
 
@@ -79,7 +93,7 @@ if __name__=='__main__':
 
     yest = LOWESS.lowess(sampleX, sampleY, iter=10)
 
-    import pylab as pl
+    import matplotlib.pylab as pl
     pl.clf()
     pl.title("")
     pl.scatter(sampleX, sampleY, label=graphLabel)
@@ -88,3 +102,7 @@ if __name__=='__main__':
     pl.ylabel(yLabel)
     pl.legend()
     pl.show()
+
+    #Interpolate Values
+    #new_x_values = [0,1,2]
+    #np.interp(new_x_values, lowess[:,0], lowess[:,1])
