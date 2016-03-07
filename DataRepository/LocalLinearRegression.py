@@ -58,50 +58,21 @@ if __name__=='__main__':
             y = anime.ageRating
             graphLabel = 'rating/age rating'
 
-        if (num <= .25):
-            testYList.append(x)
-            testXList.append(y)
-        else:
-            sampleYList.append(x)
-            sampleXList.append(y)
+        sampleYList.append(x)
+        sampleXList.append(y)
+
+    sampleXList, sampleYList = zip(*sorted(zip(sampleXList, sampleYList)))
 
     sampleX = np.array(sampleXList)
     sampleY = np.array(sampleYList)
 
-    testX = np.array(testXList)
-    testY = np.array(testYList)
-
     from matplotlib import pyplot as pl
-
-    testX, testY = zip(*sorted(zip(testX, testY)))
-    #sampleX, sampleY = zip(*sorted(zip(sampleX, sampleY)))
-
-    errorArray = []
-
-    #lr = linear_model.LogisticRegression()
-    #lr.fit(sampleX,sampleY)
-
-    for x in sampleX:
-        if x <= 0:
-            print x
 
     yest = LOWESS.lowess(sampleX, sampleY)
 
     import pylab as pl
     pl.clf()
     pl.scatter(sampleX, sampleY, label=graphLabel)
-    pl.plot(sampleX, yest, label='rating prediction')
+    pl.plot(sampleX, yest, label='rating prediction', color='red')
     pl.legend()
     pl.show()
-
-    #for i in range(0, len(testX)-1):
-    #    pre = lr.predict(testX[i])
-    #    diff = abs(pre - testY[i])
-    #    errorArray.append((diff/testY[i])*100)
-
-    #print np.mean(errorArray)
-
-    #pl.scatter(testX, testY, label=graphLabel, color='red')
-    #pl.plot(testX, lr.predict(testX), label='rating prediction')
-    #pl.legend()
-    #pl.show()
