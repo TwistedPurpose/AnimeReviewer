@@ -89,7 +89,7 @@ if __name__=='__main__':
 
     import pylab as pl
     pl.clf()
-    pl.scatter(sampleX, sampleY, label='graphLabel')
+    pl.scatter(sampleX, sampleY, label=graphLabel)
     pl.plot(sampleX, yest, label='rating prediction')
     pl.legend()
     pl.show()
