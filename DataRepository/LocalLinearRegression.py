@@ -85,5 +85,7 @@ if __name__=='__main__':
     pl.title("")
     pl.scatter(sampleX, sampleY, label=graphLabel)
     pl.plot(sampleX, yest, label='rating prediction', color='red')
+    pl.xlabel(xLabel)
+    pl.ylabel(yLabel)
     pl.legend()
     pl.show()
