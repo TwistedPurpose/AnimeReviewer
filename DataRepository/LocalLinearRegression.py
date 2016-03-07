@@ -29,48 +29,50 @@ if __name__=='__main__':
     testXList = []
 
     for anime in animeList:
-        if (anime.score < 2 or anime.episodes <= 0 or anime.episodes >= 100 
-            or anime.getYear() < 1990 or anime.duration <= 0):
+        if (anime.score < 2):
             continue
         num = random.random()
-        y = anime.score
-        x = []
+        x = anime.score
+        y = []
 
+        xLabel = "User Rating"
+        yLabel = ""
         if(testType == TestType.episodes):
-            x = anime.episodes
+            if anime.episodes <= 0 or anime.episodes >= 100:
+                continue
+            y = anime.episodes
             graphLabel = 'rating/episodes'
+            yLabel = "Episode Count"
         elif (testType == TestType.startMonth):
-            x = anime.getMonth()
+            y = anime.getMonth()
             graphLabel = 'rating/start month'
+            yLabel = "Start Month"
         elif (testType == TestType.startYear):
-            x = anime.getYear()
+            y = anime.getYear()
             graphLabel = 'rating/start year'
+            yLabel = "Start Year"
         elif (testType == TestType.ratingCount):
-            x = anime.ratingCount
+            y = anime.ratingCount
             graphLabel = 'rating/user rating count'
+            yLabel = "Number of Users Rating"
         elif (testType == TestType.duration):
-            x = anime.duration
+            if anime.duration <= 0:
+                continue
+            y = anime.duration
             graphLabel = 'rating/duration'
+            yLabel = "Episode Duration"
         elif (testType == TestType.ageRating):
-            x = anime.ageRating
+            y = anime.ageRating
             graphLabel = 'rating/age rating'
+            yLabel = "Age Rating"
 
-        if (num <= .25):
-            testYList.append(y)
-            testXList.append(x)
-        else:
-            sampleYList.append(y)
-            sampleXList.append(x)
-
+        sampleYList.append(x)
+        sampleXList.append(y)
 
     sampleXList, sampleYList = zip(*sorted(zip(sampleXList, sampleYList)))
-    testXList, testYList = zip(*sorted(zip(sampleXList, testYList)))
 
     sampleX = np.array(sampleXList)
     sampleY = np.array(sampleYList)
-
-    testX = np.array(testXList)
-    testY = np.array(testYList)
 
     from matplotlib import pyplot as pl
 
@@ -78,6 +80,7 @@ if __name__=='__main__':
 
     import pylab as pl
     pl.clf()
+    pl.title("")
     pl.scatter(sampleX, sampleY, label=graphLabel)
     pl.plot(sampleX, yest, label='rating prediction', color='red')
     pl.legend()
