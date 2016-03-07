@@ -38,24 +38,24 @@ if __name__=='__main__':
         if(testType == TestType.episodes):
             if anime.episodes <= 0 or anime.episodes >= 100:
                 continue
-            y = [anime.episodes]
+            y = anime.episodes
             graphLabel = 'rating/episodes'
         elif (testType == TestType.startMonth):
-            y = [anime.getMonth()]
+            y = anime.getMonth()
             graphLabel = 'rating/start month'
         elif (testType == TestType.startYear):
-            y = [anime.getYear()]
+            y = anime.getYear()
             graphLabel = 'rating/start year'
         elif (testType == TestType.ratingCount):
-            y = [anime.ratingCount]
+            y = anime.ratingCount
             graphLabel = 'rating/user rating count'
         elif (testType == TestType.duration):
             if anime.duration <= 0:
                 continue
-            y = [anime.duration]
+            y = anime.duration
             graphLabel = 'rating/duration'
         elif (testType == TestType.ageRating):
-            y = [anime.ageRating]
+            y = anime.ageRating
             graphLabel = 'rating/age rating'
 
         if (num <= .25):
@@ -74,6 +74,7 @@ if __name__=='__main__':
     from matplotlib import pyplot as pl
 
     testX, testY = zip(*sorted(zip(testX, testY)))
+    #sampleX, sampleY = zip(*sorted(zip(sampleX, sampleY)))
 
     errorArray = []
 
@@ -88,8 +89,8 @@ if __name__=='__main__':
 
     import pylab as pl
     pl.clf()
-    pl.plot(sampleX, sampleY, label='y noisy')
-    pl.plot(sampleX, yest, label='y pred')
+    pl.scatter(sampleX, sampleY, label='graphLabel')
+    pl.plot(sampleX, yest, label='rating prediction')
     pl.legend()
     pl.show()
 
