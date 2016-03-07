@@ -19,7 +19,7 @@ if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    testType = TestType.duration
+    testType = TestType.episodes
 
     graphLabel = ""
 
@@ -29,44 +29,48 @@ if __name__=='__main__':
     testXList = []
 
     for anime in animeList:
-        if (anime.score < 2):
+        if (anime.score < 2 or anime.episodes <= 0 or anime.episodes >= 100 
+            or anime.getYear() < 1990 or anime.duration <= 0):
             continue
         num = random.random()
-        x = anime.score
-        y = []
+        y = anime.score
+        x = []
 
         if(testType == TestType.episodes):
-            if anime.episodes <= 0 or anime.episodes >= 100:
-                continue
-            y = anime.episodes
+            x = anime.episodes
             graphLabel = 'rating/episodes'
         elif (testType == TestType.startMonth):
-            y = anime.getMonth()
+            x = anime.getMonth()
             graphLabel = 'rating/start month'
         elif (testType == TestType.startYear):
-            if anime.getYear() < 1990:
-                continue
-            y = anime.getYear()
+            x = anime.getYear()
             graphLabel = 'rating/start year'
         elif (testType == TestType.ratingCount):
-            y = anime.ratingCount
+            x = anime.ratingCount
             graphLabel = 'rating/user rating count'
         elif (testType == TestType.duration):
-            if anime.duration <= 0:
-                continue
-            y = anime.duration
+            x = anime.duration
             graphLabel = 'rating/duration'
         elif (testType == TestType.ageRating):
-            y = anime.ageRating
+            x = anime.ageRating
             graphLabel = 'rating/age rating'
 
-        sampleYList.append(x)
-        sampleXList.append(y)
+        if (num <= .25):
+            testYList.append(y)
+            testXList.append(x)
+        else:
+            sampleYList.append(y)
+            sampleXList.append(x)
+
 
     sampleXList, sampleYList = zip(*sorted(zip(sampleXList, sampleYList)))
+    testXList, testYList = zip(*sorted(zip(sampleXList, testYList)))
 
     sampleX = np.array(sampleXList)
     sampleY = np.array(sampleYList)
+
+    testX = np.array(testXList)
+    testY = np.array(testYList)
 
     from matplotlib import pyplot as pl
 

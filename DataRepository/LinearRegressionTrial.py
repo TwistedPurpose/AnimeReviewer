@@ -62,8 +62,8 @@ if __name__=='__main__':
             testYList.append(x)
             testXList.append(y)
         else:
-            sampleYList.append(x)
-            sampleXList.append(y)
+            sampleYList.append(y)
+            sampleXList.append(x)
 
     sampleX = np.array(sampleXList)
     sampleY = np.array(sampleYList)
