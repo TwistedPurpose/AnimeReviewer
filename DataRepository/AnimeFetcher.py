@@ -17,8 +17,6 @@ class Anime:
         self.duration = duration
         self.ageRating = ageRating
 
-
-
     def getMonth(self):
         return int(self.startDate.split('-')[1])
 

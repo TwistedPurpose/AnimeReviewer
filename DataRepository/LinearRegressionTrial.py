@@ -4,6 +4,8 @@ import random
 from sklearn import linear_model
 from enum import Enum
 
+import LOWESS
+
 class TestType(Enum):
     episodes = 1
     startMonth = 2
@@ -17,7 +19,7 @@ if __name__=='__main__':
     plugs = DatabasePlugs.DatabasePlugs()
     animeList = plugs.getAllAnime()
 
-    testType = TestType.duration
+    testType = TestType.episodes
 
     graphLabel = ""
 
@@ -34,6 +36,8 @@ if __name__=='__main__':
         y = []
 
         if(testType == TestType.episodes):
+            if anime.episodes <= 0 or anime.episodes >= 100:
+                continue
             y = [anime.episodes]
             graphLabel = 'rating/episodes'
         elif (testType == TestType.startMonth):
@@ -71,10 +75,28 @@ if __name__=='__main__':
 
     testX, testY = zip(*sorted(zip(testX, testY)))
 
-    lr = linear_model.LogisticRegression()
-    lr.fit(sampleX,sampleY)
+    errorArray = []
 
-    pl.scatter(testX, testY, label=graphLabel, color='red')
-    pl.plot(testX, lr.predict(testX), label='rating prediction')
+    #lr = linear_model.LogisticRegression()
+    #lr.fit(sampleX,sampleY)
+
+    yest = LOWESS.lowess(sampleX, sampleY)
+
+    import pylab as pl
+    pl.clf()
+    pl.plot(sampleX, sampleY, label='y noisy')
+    pl.plot(sampleX, yest, label='y pred')
     pl.legend()
     pl.show()
+
+    #for i in range(0, len(testX)-1):
+    #    pre = lr.predict(testX[i])
+    #    diff = abs(pre - testY[i])
+    #    errorArray.append((diff/testY[i])*100)
+
+    #print np.mean(errorArray)
+
+    #pl.scatter(testX, testY, label=graphLabel, color='red')
+    #pl.plot(testX, lr.predict(testX), label='rating prediction')
+    #pl.legend()
+    #pl.show()
