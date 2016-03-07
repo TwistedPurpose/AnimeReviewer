@@ -29,45 +29,47 @@ if __name__=='__main__':
     testXList = []
 
     for anime in animeList:
-        if (anime.score < 2):
+        if (anime.score < 2 or anime.episodes <= 0 
+            or anime.episodes >= 100 or anime.duration <= 0):
             continue
         num = random.random()
-        x = anime.score
-        y = []
+        y = anime.score
+        x = []
 
         xLabel = "User Rating"
         yLabel = ""
         if(testType == TestType.episodes):
-            if anime.episodes <= 0 or anime.episodes >= 100:
-                continue
-            y = anime.episodes
+            x = anime.episodes
             graphLabel = 'rating/episodes'
             yLabel = "Episode Count"
         elif (testType == TestType.startMonth):
-            y = anime.getMonth()
+            x = anime.getMonth()
             graphLabel = 'rating/start month'
             yLabel = "Start Month"
         elif (testType == TestType.startYear):
-            y = anime.getYear()
+            x = anime.getYear()
             graphLabel = 'rating/start year'
             yLabel = "Start Year"
         elif (testType == TestType.ratingCount):
-            y = anime.ratingCount
+            x = anime.ratingCount
             graphLabel = 'rating/user rating count'
             yLabel = "Number of Users Rating"
         elif (testType == TestType.duration):
-            if anime.duration <= 0:
-                continue
-            y = anime.duration
+            x = anime.duration
             graphLabel = 'rating/duration'
             yLabel = "Episode Duration"
         elif (testType == TestType.ageRating):
-            y = anime.ageRating
+            x = anime.ageRating
             graphLabel = 'rating/age rating'
             yLabel = "Age Rating"
 
-        sampleYList.append(x)
-        sampleXList.append(y)
+
+        if (num <= .25):
+            testYList.append(y)
+            testXList.append(x)
+        else:
+            sampleYList.append(y)
+            sampleXList.append(x)
 
     sampleXList, sampleYList = zip(*sorted(zip(sampleXList, sampleYList)))
 
