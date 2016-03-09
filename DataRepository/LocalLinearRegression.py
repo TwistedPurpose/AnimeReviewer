@@ -97,7 +97,18 @@ if __name__=='__main__':
 
     yest = LOWESS.lowess(sampleX, sampleY, iter=10)
 
+
     test = np.interp(testX, sampleX, yest)
+
+    #Calculating Statistics
+    percenterror = 0.0
+    for i in range(0,len(test)):
+        percenterror += ( (testY[i] - text[i])/testY[i] )
+    percenterror /= len(test)
+    print percenterror
+
+
+
 
     import matplotlib.pylab as pl
     pl.clf()
