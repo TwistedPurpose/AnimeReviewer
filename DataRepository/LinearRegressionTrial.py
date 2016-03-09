@@ -6,6 +6,7 @@ from enum import Enum
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import median_absolute_error
+from sklearn.metrics import r2_score
 import sys
 
 import LOWESS
@@ -95,18 +96,20 @@ if __name__=='__main__':
     testY = np.array(testYList)
 
     from matplotlib import pyplot as pl
-    
+
     lr = linear_model.LogisticRegression()
     lr.fit(sampleX,sampleY)
 
     meanSquaredError = mean_squared_error(testY,lr.predict(testX))
     meanAbsoluteErrorScore = mean_absolute_error(testY,lr.predict(testX))
     medianAbsoluteErrorScore = median_absolute_error(testY,lr.predict(testX))
+    r2Score = r2_score(testY,lr.predict(testX))
     print "mean squared error", meanSquaredError
     print "mean absolute error", meanAbsoluteErrorScore
     print "median absolute error", medianAbsoluteErrorScore
+    print "R^2 score", r2Score
 
     pl.scatter(sampleX, sampleY, label=graphLabel, color='red')
     pl.plot(testX, lr.predict(testX), label='rating prediction')
     pl.legend()
-    pl.show()
+    #pl.show()

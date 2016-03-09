@@ -8,6 +8,7 @@ from sklearn import tree
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.metrics import median_absolute_error
+from sklearn.metrics import r2_score
 
 class TestType(Enum):
     episodes = 1
@@ -104,11 +105,13 @@ if __name__=='__main__':
     meanSquaredError = mean_squared_error(testY,dt.predict(testX))
     meanAbsoluteErrorScore = mean_absolute_error(testY,dt.predict(testX))
     medianAbsoluteErrorScore = median_absolute_error(testY,dt.predict(testX))
+    r2Score = r2_score(testY,dt.predict(testX))
     print "mean squared error", meanSquaredError
     print "mean absolute error", meanAbsoluteErrorScore
     print "median absolute error", medianAbsoluteErrorScore
+    print "R^2 score", r2Score
 
     pl.scatter(sampleX, sampleY, label=graphLabel, color='red')
     pl.plot(testX, dt.predict(testX), label='rating prediction')
     pl.legend()
-    pl.show()
+    #pl.show()
