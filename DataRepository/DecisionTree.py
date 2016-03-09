@@ -3,16 +3,8 @@ import numpy as np
 import random
 from sklearn import linear_model
 from enum import Enum
-
-import DatabasePlugs
-import numpy as np
-import random
-from sklearn import linear_model
-from enum import Enum
 import sys
-import statsmodels.api as sm
-
-import LOWESS
+from sklearn import tree
 
 class TestType(Enum):
     episodes = 1
@@ -103,17 +95,17 @@ if __name__=='__main__':
 
     errorArray = []
 
-    lr = linear_model.LogisticRegression()
-    lr.fit(sampleX,sampleY)
+    dt = tree.DecisionTreeClassifier()
+    dt.fit(sampleX,sampleY)
 
     for i in range(0, len(testX)-1):
-        pre = lr.predict(testX[i])
+        pre = dt.predict(testX[i])
         diff = abs(pre - testY[i])
         errorArray.append((diff/testY[i])*100)
 
     print np.mean(errorArray)
 
     pl.scatter(testX, testY, label=graphLabel, color='red')
-    pl.plot(testX, lr.predict(testX), label='rating prediction')
+    pl.plot(testX, dt.predict(testX), label='rating prediction')
     pl.legend()
     pl.show()
