@@ -121,4 +121,4 @@ if __name__=='__main__':
     pl.xlabel(xLabel)
     pl.ylabel(yLabel)
     pl.legend()
-    #pl.show()
+    pl.show()

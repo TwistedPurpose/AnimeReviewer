@@ -112,4 +112,4 @@ if __name__=='__main__':
     pl.scatter(sampleX, sampleY, label=graphLabel, color='red')
     pl.plot(testX, lr.predict(testX), label='rating prediction')
     pl.legend()
-    #pl.show()
+    pl.show()
