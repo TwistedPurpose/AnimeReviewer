@@ -3,14 +3,10 @@ import numpy as np
 import random
 from sklearn import linear_model
 from enum import Enum
-
-import DatabasePlugs
-import numpy as np
-import random
-from sklearn import linear_model
-from enum import Enum
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import median_absolute_error
 import sys
-import statsmodels.api as sm
 
 import LOWESS
 
@@ -39,7 +35,6 @@ if __name__=='__main__':
             testType = TestType.ratingCount
         elif (sys.argv[1] == '5'):
             testType = TestType.duration
-
 
     graphLabel = ""
 
@@ -100,20 +95,18 @@ if __name__=='__main__':
     testY = np.array(testYList)
 
     from matplotlib import pyplot as pl
-
-    errorArray = []
-
+    
     lr = linear_model.LogisticRegression()
     lr.fit(sampleX,sampleY)
 
-    for i in range(0, len(testX)-1):
-        pre = lr.predict(testX[i])
-        diff = abs(pre - testY[i])
-        errorArray.append((diff/testY[i])*100)
+    meanSquaredError = mean_squared_error(testY,lr.predict(testX))
+    meanAbsoluteErrorScore = mean_absolute_error(testY,lr.predict(testX))
+    medianAbsoluteErrorScore = median_absolute_error(testY,lr.predict(testX))
+    print "mean squared error", meanSquaredError
+    print "mean absolute error", meanAbsoluteErrorScore
+    print "median absolute error", medianAbsoluteErrorScore
 
-    print np.mean(errorArray)
-
-    pl.scatter(testX, testY, label=graphLabel, color='red')
+    pl.scatter(sampleX, sampleY, label=graphLabel, color='red')
     pl.plot(testX, lr.predict(testX), label='rating prediction')
     pl.legend()
     pl.show()

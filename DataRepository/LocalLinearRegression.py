@@ -1,9 +1,11 @@
 import DatabasePlugs
 import numpy as np
 import random
-from sklearn import linear_model
 from enum import Enum
 import sys
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import median_absolute_error
 
 import LOWESS
 
@@ -97,25 +99,22 @@ if __name__=='__main__':
 
     yest = LOWESS.lowess(sampleX, sampleY, iter=10)
 
-
     test = np.interp(testX, sampleX, yest)
 
     #Calculating Statistics
-    percenterror = 0.0
-    for i in range(0,len(test)):
-        percenterror += ( (testY[i] - text[i])/testY[i] )
-    percenterror /= len(test)
-    print percenterror
-
-
-
+    meanSquaredError = mean_squared_error(testY,test)
+    meanAbsoluteErrorScore = mean_absolute_error(testY,test)
+    medianAbsoluteErrorScore = median_absolute_error(testY,test)
+    print "mean squared error", meanSquaredError
+    print "mean absolute error", meanAbsoluteErrorScore
+    print "median absolute error", medianAbsoluteErrorScore
 
     import matplotlib.pylab as pl
     pl.clf()
     pl.title("")
     pl.scatter(sampleX, sampleY, label=graphLabel)
     pl.plot(sampleX, yest, label='rating prediction', color='red')
-    pl.plot(testX, test, label='test', color='green')
+    #pl.plot(testX, test, label='test', color='green')
     pl.xlabel(xLabel)
     pl.ylabel(yLabel)
     pl.legend()

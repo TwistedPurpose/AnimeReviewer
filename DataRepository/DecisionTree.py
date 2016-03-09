@@ -5,6 +5,9 @@ from sklearn import linear_model
 from enum import Enum
 import sys
 from sklearn import tree
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import median_absolute_error
 
 class TestType(Enum):
     episodes = 1
@@ -98,14 +101,14 @@ if __name__=='__main__':
     dt = tree.DecisionTreeClassifier()
     dt.fit(sampleX,sampleY)
 
-    for i in range(0, len(testX)-1):
-        pre = dt.predict(testX[i])
-        diff = abs(pre - testY[i])
-        errorArray.append((diff/testY[i])*100)
+    meanSquaredError = mean_squared_error(testY,dt.predict(testX))
+    meanAbsoluteErrorScore = mean_absolute_error(testY,dt.predict(testX))
+    medianAbsoluteErrorScore = median_absolute_error(testY,dt.predict(testX))
+    print "mean squared error", meanSquaredError
+    print "mean absolute error", meanAbsoluteErrorScore
+    print "median absolute error", medianAbsoluteErrorScore
 
-    print np.mean(errorArray)
-
-    pl.scatter(testX, testY, label=graphLabel, color='red')
+    pl.scatter(sampleX, sampleY, label=graphLabel, color='red')
     pl.plot(testX, dt.predict(testX), label='rating prediction')
     pl.legend()
     pl.show()
