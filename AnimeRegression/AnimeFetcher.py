@@ -2,6 +2,8 @@ import requests
 import xml.etree.ElementTree as ET
 from Scraper import pagescraper
 
+#Fetches anime data from MyAnimeList.net
+
 class Anime: 
     def __init__(self, malId, title, score, animeType, startDate, endDate, episodes,
         description,ratingCount=0,duration=0,ageRating=''):
