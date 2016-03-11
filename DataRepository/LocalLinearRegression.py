@@ -48,7 +48,8 @@ if __name__=='__main__':
     for anime in animeList:
         if (anime.score < 2 or anime.episodes <= 0 
             or anime.episodes >= 100 or anime.duration <= 0
-            or anime.getMonth() <= 0 or anime.ratingCount <= 0):
+            or anime.getMonth() <= 0 or anime.ratingCount <= 0
+            or anime.getYear() <= 1950):
             continue
         num = random.random()
         y = anime.score
